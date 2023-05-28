@@ -11,9 +11,7 @@ namespace Foghorn.Logging
 
         public bool NoThrow = false;
 
-        public LogLevel MinLogLevel = LogLevel.Information;
-
-        public ICollection<ILogOutputProvider> LogOutputs =
-            new List<ILogOutputProvider>();
+        public ICollection<KeyValuePair<LogLevel, ILogOutputProvider>> LogOutputs =
+            new List<KeyValuePair<LogLevel, ILogOutputProvider>>();
     }
 }

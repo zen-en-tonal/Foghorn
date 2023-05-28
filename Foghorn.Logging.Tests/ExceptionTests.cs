@@ -11,8 +11,7 @@ public class ExceptionTests
     public void When_NoThrow_called__should_not_throw_exception()
     {
         var logger = new FoghornLoggerBuilder("ident", "host")
-            .MinLogLevel(LogLevel.Trace)
-            .AddLogOutput(new ThrowableOutputProvider())
+            .AddLogOutput(LogLevel.Trace, new ThrowableOutputProvider())
             .NoThrow()
             .Build();
 
@@ -30,8 +29,7 @@ public class ExceptionTests
     public void When_not_NoThrow__should_throw_exception()
     {
         var logger = new FoghornLoggerBuilder("ident", "host")
-            .MinLogLevel(LogLevel.Trace)
-            .AddLogOutput(new ThrowableOutputProvider())
+            .AddLogOutput(LogLevel.Trace, new ThrowableOutputProvider())
             .Build();
 
         Assert.Throws<Exception>(() =>

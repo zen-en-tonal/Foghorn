@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Foghorn.Log;
 
 namespace Foghorn.Logging
@@ -33,15 +34,10 @@ namespace Foghorn.Logging
             return this;
         }
 
-        public FoghornLoggerBuilder AddLogOutput(ILogOutputProvider output)
+        public FoghornLoggerBuilder AddLogOutput(LogLevel logLevel, ILogOutputProvider output)
         {
-            this.Config.LogOutputs.Add(output);
-            return this;
-        }
-
-        public FoghornLoggerBuilder MinLogLevel(LogLevel logLevel)
-        {
-            this.Config.MinLogLevel = logLevel;
+            this.Config.LogOutputs.Add(
+                new KeyValuePair<LogLevel, ILogOutputProvider>(logLevel, output));
             return this;
         }
 
