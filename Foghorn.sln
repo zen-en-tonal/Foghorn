@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn", "Foghorn\Foghorn.csproj", "{8069A5C3-AA57-429C-B319-F60AC1643BAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Extensions.Logging", "Foghorn.Extensions.Logging\Foghorn.Extensions.Logging.csproj", "{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.API", "Foghorn.API\Foghorn.API.csproj", "{69BD9A92-BBAD-47AE-A01E-311ED20D8128}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Logging", "Foghorn.Logging\Foghorn.Logging.csproj", "{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.SqlServer", "Foghorn.SqlServer\Foghorn.SqlServer.csproj", "{D495EC10-AC34-42F7-B51F-0F9E2BEA67C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Log", "Foghorn.Log\Foghorn.Log.csproj", "{1BB70D12-9FB0-4875-A4ED-BC3FCC0163D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Logging.Tests", "Foghorn.Logging.Tests\Foghorn.Logging.Tests.csproj", "{E205656D-A796-43ED-8ACF-2C318CC6EDD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,17 +20,21 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8069A5C3-AA57-429C-B319-F60AC1643BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8069A5C3-AA57-429C-B319-F60AC1643BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8069A5C3-AA57-429C-B319-F60AC1643BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8069A5C3-AA57-429C-B319-F60AC1643BAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69BD9A92-BBAD-47AE-A01E-311ED20D8128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69BD9A92-BBAD-47AE-A01E-311ED20D8128}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69BD9A92-BBAD-47AE-A01E-311ED20D8128}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69BD9A92-BBAD-47AE-A01E-311ED20D8128}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D495EC10-AC34-42F7-B51F-0F9E2BEA67C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D495EC10-AC34-42F7-B51F-0F9E2BEA67C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D495EC10-AC34-42F7-B51F-0F9E2BEA67C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D495EC10-AC34-42F7-B51F-0F9E2BEA67C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB70D12-9FB0-4875-A4ED-BC3FCC0163D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB70D12-9FB0-4875-A4ED-BC3FCC0163D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB70D12-9FB0-4875-A4ED-BC3FCC0163D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB70D12-9FB0-4875-A4ED-BC3FCC0163D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E205656D-A796-43ED-8ACF-2C318CC6EDD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E205656D-A796-43ED-8ACF-2C318CC6EDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E205656D-A796-43ED-8ACF-2C318CC6EDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E205656D-A796-43ED-8ACF-2C318CC6EDD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
