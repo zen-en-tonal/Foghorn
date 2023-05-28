@@ -7,6 +7,8 @@ namespace Foghorn.Log
     {
         public static LogAttributes Empty = new LogAttributes();
 
+        public bool IsEmpty() => this.Count == 0;
+
         public LogAttributes Clone()
         {
             return (LogAttributes)this.MemberwiseClone();
