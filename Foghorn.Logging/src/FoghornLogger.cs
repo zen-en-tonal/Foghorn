@@ -70,9 +70,12 @@ namespace Foghorn.Logging
             if (!this.InEnabled(log.LogLevel)) return;
             try
             {
-                foreach (var output in this.Config.LogOutputs)
+                foreach (var provider in this.Config.LogOutputs)
                 {
-                    output.Write(log);
+                    using (var output = provider.CreateLogOutput())
+                    {
+                        output.Write(log);
+                    }
                 }
             }
             catch (Exception)
@@ -87,7 +90,13 @@ namespace Foghorn.Logging
             if (!this.InEnabled(log.LogLevel)) return Task.FromResult(0);
             try
             {
-                var tasks = this.Config.LogOutputs.Select(o => o.WriteAsync(log));
+                var tasks = this.Config.LogOutputs.Select(provider =>
+                {
+                    using (var output = provider.CreateLogOutput())
+                    {
+                        return output.WriteAsync(log);
+                    }
+                });
                 return Task.WhenAll(tasks);
             }
             catch (Exception)

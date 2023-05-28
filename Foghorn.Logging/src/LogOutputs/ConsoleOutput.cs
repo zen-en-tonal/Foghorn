@@ -5,6 +5,11 @@ namespace Foghorn.Logging
 {
     public class ConsoleOutput : ILogOutput
     {
+        public void Dispose()
+        {
+            // no-op
+        }
+
         public void Write(FoghornLog log)
         {
             throw new System.NotImplementedException();

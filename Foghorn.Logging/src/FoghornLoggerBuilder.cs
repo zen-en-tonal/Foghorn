@@ -33,7 +33,7 @@ namespace Foghorn.Logging
             return this;
         }
 
-        public FoghornLoggerBuilder AddLogOutput(ILogOutput output)
+        public FoghornLoggerBuilder AddLogOutput(ILogOutputProvider output)
         {
             this.Config.LogOutputs.Add(output);
             return this;
@@ -42,12 +42,6 @@ namespace Foghorn.Logging
         public FoghornLoggerBuilder MinLogLevel(LogLevel logLevel)
         {
             this.Config.MinLogLevel = logLevel;
-            return this;
-        }
-
-        public FoghornLoggerBuilder UseConsole()
-        {
-            this.AddLogOutput(new ConsoleOutput());
             return this;
         }
 

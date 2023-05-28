@@ -12,7 +12,7 @@ public class ExceptionTests
     {
         var logger = new FoghornLoggerBuilder("ident", "host")
             .MinLogLevel(LogLevel.Trace)
-            .AddLogOutput(new ThrowableOutput())
+            .AddLogOutput(new ThrowableOutputProvider())
             .NoThrow()
             .Build();
 
@@ -31,7 +31,7 @@ public class ExceptionTests
     {
         var logger = new FoghornLoggerBuilder("ident", "host")
             .MinLogLevel(LogLevel.Trace)
-            .AddLogOutput(new ThrowableOutput())
+            .AddLogOutput(new ThrowableOutputProvider())
             .Build();
 
         Assert.Throws<Exception>(() =>
@@ -52,6 +52,11 @@ public class ExceptionTests
 
     class ThrowableOutput : ILogOutput
     {
+        public void Dispose()
+        {
+            // no-op
+        }
+
         public void Write(FoghornLog log)
         {
             throw new System.Exception();
@@ -60,6 +65,14 @@ public class ExceptionTests
         public Task WriteAsync(FoghornLog log)
         {
             throw new System.Exception();
+        }
+    }
+
+    class ThrowableOutputProvider : ILogOutputProvider
+    {
+        public ILogOutput CreateLogOutput()
+        {
+            return new ThrowableOutput();
         }
     }
 }

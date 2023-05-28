@@ -13,6 +13,7 @@ namespace Foghorn.Logging
 
         public LogLevel MinLogLevel = LogLevel.Information;
 
-        public ICollection<ILogOutput> LogOutputs = new List<ILogOutput>();
+        public ICollection<ILogOutputProvider> LogOutputs =
+            new List<ILogOutputProvider>();
     }
 }

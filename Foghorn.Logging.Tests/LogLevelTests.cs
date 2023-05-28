@@ -12,10 +12,12 @@ public class LogLevelTests
         // Given
         var logOutput = new Mock<ILogOutput>();
         logOutput.Setup(o => o.Write(It.IsAny<FoghornLog>()));
+        var logOutputProvider = new Mock<ILogOutputProvider>();
+        logOutputProvider.Setup(l => l.CreateLogOutput()).Returns(logOutput.Object);
 
         var logger = new FoghornLoggerBuilder("ident", "host")
             .MinLogLevel(LogLevel.None)
-            .AddLogOutput(logOutput.Object)
+            .AddLogOutput(logOutputProvider.Object)
             .Build();
 
         // When
