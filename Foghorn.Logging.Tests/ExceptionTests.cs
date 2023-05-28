@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Foghorn.Log;
+using Moq;
 using Xunit;
 
 namespace Foghorn.Logging.Tests;
@@ -46,6 +47,37 @@ public class ExceptionTests
                 "message",
                 LogAttributes.Empty);
         });
+    }
+
+    [Fact]
+    public void When_throws_on_output__next_output_is_not_called()
+    {
+        var logOutput = new Mock<ILogOutput>();
+        logOutput.Setup(o => o.Write(It.IsAny<FoghornLog>()));
+        var logOutputProvider = new Mock<ILogOutputProvider>();
+        logOutputProvider.Setup(l => l.CreateLogOutput()).Returns(logOutput.Object);
+
+        var logger = new FoghornLoggerBuilder("ident", "host")
+            .AddLogOutput(LogLevel.Trace, new ThrowableOutputProvider())
+            .AddLogOutput(LogLevel.Trace, logOutputProvider.Object)
+            .Build();
+
+        Assert.Throws<Exception>(() =>
+        {
+            logger.Log(
+                LogLevel.Debug,
+                "message",
+                LogAttributes.Empty);
+        });
+        logOutput.Verify(l => l.Write(It.IsAny<FoghornLog>()), Times.Never);
+        Assert.ThrowsAsync<Exception>(() =>
+        {
+            return logger.LogAsync(
+                LogLevel.Debug,
+                "message",
+                LogAttributes.Empty);
+        });
+        logOutput.Verify(l => l.WriteAsync(It.IsAny<FoghornLog>()), Times.Never);
     }
 
     class ThrowableOutput : ILogOutput
