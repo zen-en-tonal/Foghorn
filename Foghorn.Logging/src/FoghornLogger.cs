@@ -84,7 +84,7 @@ namespace Foghorn.Logging
 
         private Task LogAsync(FoghornLog log)
         {
-            if (!this.InEnabled(log.LogLevel)) return Task.CompletedTask;
+            if (!this.InEnabled(log.LogLevel)) return Task.FromResult(0);
             try
             {
                 var tasks = this.Config.LogOutputs.Select(o => o.WriteAsync(log));
@@ -92,7 +92,7 @@ namespace Foghorn.Logging
             }
             catch (Exception)
             {
-                if (this.Config.NoThrow) return Task.CompletedTask;
+                if (this.Config.NoThrow) return Task.FromResult(0);
                 throw;
             }
         }
