@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Extensions.Logging", "Foghorn.Extensions.Logging\Foghorn.Extensions.Logging.csproj", "{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Logging", "Foghorn.Logging\Foghorn.Logging.csproj", "{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Log", "Foghorn.Log\Foghorn.Log.csproj", "{1BB70D12-9FB0-4875-A4ED-BC3FCC0163D3}"
@@ -20,10 +18,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{342B17C3-31C0-4ADD-A3E0-4A6939A37EA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D739B2F-BD84-4718-9BA7-77B3B76CC6A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
