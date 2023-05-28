@@ -2,18 +2,18 @@ namespace Foghorn.Log
 {
     public enum LogLevel
     {
-        Trace = 0,
+        Trace = 1,
 
-        Debug = 1,
+        Debug = 2,
 
-        Information = 2,
+        Information = 4,
 
-        Warning = 3,
+        Warning = 8,
 
-        Error = 4,
+        Error = 16,
 
-        Critical = 5,
+        Critical = 32,
 
-        None = -1
+        None = 256
     }
 }
