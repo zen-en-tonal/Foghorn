@@ -4,7 +4,21 @@ namespace Foghorn.Logging
 {
     public class FoghornLoggerBuilder : FoghornLoggerConfiguration
     {
-        public FoghornLoggerBuilder() { }
+        public FoghornLoggerBuilder(string ident, string host)
+        {
+            if (string.IsNullOrEmpty(ident))
+            {
+                throw new System.ArgumentException($"'{nameof(ident)}' cannot be null or empty.", nameof(ident));
+            }
+
+            if (string.IsNullOrEmpty(host))
+            {
+                throw new System.ArgumentException($"'{nameof(host)}' cannot be null or empty.", nameof(host));
+            }
+
+            this.Ident = ident;
+            this.Host = host;
+        }
 
         public FoghornLoggerBuilder SetNoThrow()
         {

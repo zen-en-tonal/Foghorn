@@ -10,7 +10,7 @@ public class ExceptionTests
     [Fact]
     public void When_SetNoThrow_called__should_not_throw_exception()
     {
-        var logger = new FoghornLoggerBuilder()
+        var logger = new FoghornLoggerBuilder("ident", "host")
             .SetMinLogLevel(LogLevel.Trace)
             .AddLogOutput(new ThrowableOutput())
             .SetNoThrow()
@@ -18,14 +18,10 @@ public class ExceptionTests
 
         logger.Log(
             LogLevel.Debug,
-            "ident",
-            "host",
             "message",
             LogAttributes.Empty);
         logger.LogAsync(
             LogLevel.Debug,
-            "ident",
-            "host",
             "message",
             LogAttributes.Empty).Wait();
     }
@@ -33,7 +29,7 @@ public class ExceptionTests
     [Fact]
     public void When_not_SetNoThrow__should_throw_exception()
     {
-        var logger = new FoghornLoggerBuilder()
+        var logger = new FoghornLoggerBuilder("ident", "host")
             .SetMinLogLevel(LogLevel.Trace)
             .AddLogOutput(new ThrowableOutput())
             .Build();
@@ -42,8 +38,6 @@ public class ExceptionTests
         {
             logger.Log(
                 LogLevel.Debug,
-                "ident",
-                "host",
                 "message",
                 LogAttributes.Empty);
         });
@@ -51,8 +45,6 @@ public class ExceptionTests
         {
             return logger.LogAsync(
                 LogLevel.Debug,
-                "ident",
-                "host",
                 "message",
                 LogAttributes.Empty);
         });

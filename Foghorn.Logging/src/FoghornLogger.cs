@@ -9,7 +9,7 @@ namespace Foghorn.Logging
     {
         private readonly FoghornLoggerConfiguration Config;
 
-        public FoghornLogger(FoghornLoggerConfiguration config)
+        internal FoghornLogger(FoghornLoggerConfiguration config)
         {
             this.Config = config;
         }
@@ -21,55 +21,47 @@ namespace Foghorn.Logging
 
         public void Log(
             LogLevel logLevel,
-            string ident,
-            string host,
             string message,
             LogAttributes attributes)
         {
             this.Log(new FoghornLog(
-                ident, logLevel, message,
-                host, DateTime.Now, attributes
+                this.Config.Ident, logLevel, message,
+                this.Config.Host, DateTime.Now, attributes
             ));
         }
 
         public void Log(
             LogLevel logLevel,
-            string ident,
-            string host,
             string message,
             Exception e,
             LogAttributes attributes)
         {
             this.Log(new FoghornLog(
-                ident, logLevel, message,
-                host, DateTime.Now, this.AppendException(attributes, e)
+                this.Config.Ident, logLevel, message,
+                this.Config.Host, DateTime.Now, this.AppendException(attributes, e)
             ));
         }
 
         public async Task LogAsync(
             LogLevel logLevel,
-            string ident,
-            string host,
             string message,
             LogAttributes attributes)
         {
             await this.LogAsync(new FoghornLog(
-                ident, logLevel, message,
-                host, DateTime.Now, attributes
+                this.Config.Ident, logLevel, message,
+                this.Config.Host, DateTime.Now, attributes
             ));
         }
 
         public async Task LogAsync(
             LogLevel logLevel,
-            string ident,
-            string host,
             string message,
             Exception e,
             LogAttributes attributes)
         {
             await this.LogAsync(new FoghornLog(
-                ident, logLevel, message,
-                host, DateTime.Now, this.AppendException(attributes, e)
+                this.Config.Ident, logLevel, message,
+                this.Config.Host, DateTime.Now, this.AppendException(attributes, e)
             ));
         }
 
