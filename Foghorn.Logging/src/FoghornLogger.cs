@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Foghorn.Log;
@@ -14,9 +15,11 @@ namespace Foghorn.Logging
             this.Config = config;
         }
 
-        public bool InEnabled(LogLevel logLevel)
+        private IEnumerable<ILogOutputProvider> GetEnabledOutputProviders(LogLevel logLevel)
         {
-            return logLevel >= this.Config.MinLogLevel;
+            return this.Config.LogOutputs
+                .Where(l => logLevel >= l.Key)
+                .Select(l => l.Value);
         }
 
         public void Log(
@@ -67,15 +70,19 @@ namespace Foghorn.Logging
 
         private void Log(FoghornLog log)
         {
-            if (!this.InEnabled(log.LogLevel)) return;
+            foreach (var provider in this.GetEnabledOutputProviders(log.LogLevel))
+            {
+                this.TryLog(log, provider);
+            }
+        }
+
+        private void TryLog(FoghornLog log, ILogOutputProvider provider)
+        {
             try
             {
-                foreach (var provider in this.Config.LogOutputs)
+                using (var output = provider.CreateLogOutput())
                 {
-                    using (var output = provider.CreateLogOutput())
-                    {
-                        output.Write(log);
-                    }
+                    output.Write(log);
                 }
             }
             catch (Exception)
@@ -87,17 +94,19 @@ namespace Foghorn.Logging
 
         private Task LogAsync(FoghornLog log)
         {
-            if (!this.InEnabled(log.LogLevel)) return Task.FromResult(0);
+            var tasks = this.GetEnabledOutputProviders(log.LogLevel)
+                .Select(provider => this.TryLogAsync(log, provider));
+            return Task.WhenAll(tasks);
+        }
+
+        private Task TryLogAsync(FoghornLog log, ILogOutputProvider provider)
+        {
             try
             {
-                var tasks = this.Config.LogOutputs.Select(provider =>
+                using (var output = provider.CreateLogOutput())
                 {
-                    using (var output = provider.CreateLogOutput())
-                    {
-                        return output.WriteAsync(log);
-                    }
-                });
-                return Task.WhenAll(tasks);
+                    return output.WriteAsync(log);
+                }
             }
             catch (Exception)
             {
