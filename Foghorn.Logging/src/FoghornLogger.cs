@@ -42,24 +42,24 @@ namespace Foghorn.Logging
             ));
         }
 
-        public async Task LogAsync(
+        public Task LogAsync(
             LogLevel logLevel,
             string message,
             LogAttributes attributes)
         {
-            await this.LogAsync(new FoghornLog(
+            return this.LogAsync(new FoghornLog(
                 this.Config.Ident, logLevel, message,
                 this.Config.Host, DateTime.Now, attributes
             ));
         }
 
-        public async Task LogAsync(
+        public Task LogAsync(
             LogLevel logLevel,
             string message,
             Exception e,
             LogAttributes attributes)
         {
-            await this.LogAsync(new FoghornLog(
+            return this.LogAsync(new FoghornLog(
                 this.Config.Ident, logLevel, message,
                 this.Config.Host, DateTime.Now, this.AppendException(attributes, e)
             ));
@@ -82,17 +82,17 @@ namespace Foghorn.Logging
             }
         }
 
-        private async Task LogAsync(FoghornLog log)
+        private Task LogAsync(FoghornLog log)
         {
-            if (!this.InEnabled(log.LogLevel)) return;
+            if (!this.InEnabled(log.LogLevel)) return Task.CompletedTask;
             try
             {
                 var tasks = this.Config.LogOutputs.Select(o => o.WriteAsync(log));
-                await Task.WhenAll(tasks);
+                return Task.WhenAll(tasks);
             }
             catch (Exception)
             {
-                if (this.Config.NoThrow) return;
+                if (this.Config.NoThrow) return Task.CompletedTask;
                 throw;
             }
         }
