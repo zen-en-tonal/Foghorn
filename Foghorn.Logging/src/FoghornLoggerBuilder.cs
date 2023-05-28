@@ -12,9 +12,9 @@ namespace Foghorn.Logging
             return this;
         }
 
-        public FoghornLoggerBuilder AddOutput(IOutput output)
+        public FoghornLoggerBuilder AddLogOutput(ILogOutput output)
         {
-            this.Outputs.Add(output);
+            this.LogOutputs.Add(output);
             return this;
         }
 
@@ -26,7 +26,7 @@ namespace Foghorn.Logging
 
         public FoghornLoggerBuilder UseConsole()
         {
-            this.AddOutput(new ConsoleOutput());
+            this.AddLogOutput(new ConsoleOutput());
             return this;
         }
 

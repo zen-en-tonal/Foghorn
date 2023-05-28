@@ -8,11 +8,11 @@ namespace Foghorn.Logging.Tests;
 public class ExceptionTests
 {
     [Fact]
-    public void When_SetNoThrow__should_not_throw_exception()
+    public void When_SetNoThrow_called__should_not_throw_exception()
     {
         var logger = new FoghornLoggerBuilder()
             .SetMinLogLevel(LogLevel.Trace)
-            .AddOutput(new ThrowableOutput())
+            .AddLogOutput(new ThrowableOutput())
             .SetNoThrow()
             .Build();
 
@@ -35,7 +35,7 @@ public class ExceptionTests
     {
         var logger = new FoghornLoggerBuilder()
             .SetMinLogLevel(LogLevel.Trace)
-            .AddOutput(new ThrowableOutput())
+            .AddLogOutput(new ThrowableOutput())
             .Build();
 
         Assert.Throws<Exception>(() =>
@@ -58,7 +58,7 @@ public class ExceptionTests
         });
     }
 
-    class ThrowableOutput : IOutput
+    class ThrowableOutput : ILogOutput
     {
         public void Write(FoghornLog log)
         {

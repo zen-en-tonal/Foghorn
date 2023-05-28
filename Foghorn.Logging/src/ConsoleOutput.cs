@@ -3,7 +3,7 @@ using Foghorn.Log;
 
 namespace Foghorn.Logging
 {
-    public class ConsoleOutput : IOutput
+    public class ConsoleOutput : ILogOutput
     {
         public void Write(FoghornLog log)
         {
