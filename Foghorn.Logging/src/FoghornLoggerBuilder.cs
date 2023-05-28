@@ -8,12 +8,16 @@ namespace Foghorn.Logging
         {
             if (string.IsNullOrEmpty(ident))
             {
-                throw new System.ArgumentException($"'{nameof(ident)}' cannot be null or empty.", nameof(ident));
+                throw new System.ArgumentException(
+                    $"'{nameof(ident)}' cannot be null or empty.",
+                    nameof(ident));
             }
 
             if (string.IsNullOrEmpty(host))
             {
-                throw new System.ArgumentException($"'{nameof(host)}' cannot be null or empty.", nameof(host));
+                throw new System.ArgumentException(
+                    $"'{nameof(host)}' cannot be null or empty.",
+                    nameof(host));
             }
 
             this.Ident = ident;
