@@ -2,8 +2,10 @@ using Foghorn.Log;
 
 namespace Foghorn.Logging
 {
-    public class FoghornLoggerBuilder : FoghornLoggerConfiguration
+    public class FoghornLoggerBuilder
     {
+        private FoghornLoggerConfiguration Config;
+
         public FoghornLoggerBuilder(string ident, string host)
         {
             if (string.IsNullOrEmpty(ident))
@@ -20,25 +22,26 @@ namespace Foghorn.Logging
                     nameof(host));
             }
 
-            this.Ident = ident;
-            this.Host = host;
+            this.Config = new FoghornLoggerConfiguration();
+            this.Config.Ident = ident;
+            this.Config.Host = host;
         }
 
-        public FoghornLoggerBuilder SetNoThrow()
+        public FoghornLoggerBuilder NoThrow()
         {
-            this.NoThrow = true;
+            this.Config.NoThrow = true;
             return this;
         }
 
         public FoghornLoggerBuilder AddLogOutput(ILogOutput output)
         {
-            this.LogOutputs.Add(output);
+            this.Config.LogOutputs.Add(output);
             return this;
         }
 
-        public FoghornLoggerBuilder SetMinLogLevel(LogLevel logLevel)
+        public FoghornLoggerBuilder MinLogLevel(LogLevel logLevel)
         {
-            this.MinLogLevel = logLevel;
+            this.Config.MinLogLevel = logLevel;
             return this;
         }
 
@@ -50,7 +53,7 @@ namespace Foghorn.Logging
 
         public FoghornLogger Build()
         {
-            return new FoghornLogger(this);
+            return new FoghornLogger(this.Config);
         }
     }
 }
