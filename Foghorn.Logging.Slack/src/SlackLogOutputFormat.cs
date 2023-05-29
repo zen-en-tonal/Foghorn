@@ -14,8 +14,8 @@ namespace Foghorn.Logging.Slack
         static string Attributes(LogAttributes attr)
         {
             if (attr.IsEmpty()) return "";
-            var tableHeader = "|||\n" + "|---|---|\n";
-            return attr.Aggregate(tableHeader, (l, r) => l + $"|{r.Key}|{r.Value}|\n");
+            var columns = attr.Select((a) => $"|{a.Key}|{a.Value}|");
+            return string.Join("\n", columns);
         }
     }
 }
