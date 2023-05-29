@@ -6,7 +6,7 @@ using Foghorn.Log;
 
 namespace Foghorn.Logging
 {
-    public class FoghornLogger
+    public class FoghornLogger : IFoghornLogger
     {
         private readonly FoghornLoggerConfiguration Config;
 
@@ -25,34 +25,12 @@ namespace Foghorn.Logging
         public void Log(
             LogLevel logLevel,
             string message,
-            LogAttributes attributes)
-        {
-            this.Log(new FoghornLog(
-                this.Config.Ident, logLevel, message,
-                this.Config.Host, DateTime.Now, attributes
-            ));
-        }
-
-        public void Log(
-            LogLevel logLevel,
-            string message,
             Exception e,
             LogAttributes attributes)
         {
             this.Log(new FoghornLog(
                 this.Config.Ident, logLevel, message,
                 this.Config.Host, DateTime.Now, this.AppendException(attributes, e)
-            ));
-        }
-
-        public Task LogAsync(
-            LogLevel logLevel,
-            string message,
-            LogAttributes attributes)
-        {
-            return this.LogAsync(new FoghornLog(
-                this.Config.Ident, logLevel, message,
-                this.Config.Host, DateTime.Now, attributes
             ));
         }
 
@@ -117,6 +95,7 @@ namespace Foghorn.Logging
 
         private LogAttributes AppendException(LogAttributes attr, Exception ex)
         {
+            if (ex is null) return attr;
             var copy = attr.Clone();
             copy.Add("ExceptionType", ex.GetType().Name);
             copy.Add("ExceptionMessage", ex.Message);

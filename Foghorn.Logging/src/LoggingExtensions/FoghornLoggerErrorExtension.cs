@@ -8,7 +8,7 @@ namespace Foghorn.Logging
         const LogLevel Level = LogLevel.Error;
 
         public static void Error(
-            this FoghornLogger logger,
+            this IFoghornLogger logger,
             string message,
             Exception ex
         )
@@ -17,7 +17,7 @@ namespace Foghorn.Logging
         }
 
         public static void Error(
-            this FoghornLogger logger,
+            this IFoghornLogger logger,
             string message,
             Exception ex,
             LogAttributes attr
@@ -27,20 +27,20 @@ namespace Foghorn.Logging
         }
 
         public static void Error(
-            this FoghornLogger logger,
+            this IFoghornLogger logger,
             string message
         )
         {
-            logger.Log(Level, message, LogAttributes.Empty);
+            logger.Log(Level, message, null, LogAttributes.Empty);
         }
 
         public static void Error(
-            this FoghornLogger logger,
+            this IFoghornLogger logger,
             string message,
             LogAttributes attr
         )
         {
-            logger.Log(Level, message, attr);
+            logger.Log(Level, message, null, attr);
         }
     }
 }

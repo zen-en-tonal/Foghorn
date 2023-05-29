@@ -19,10 +19,12 @@ public class ExceptionTests
         logger.Log(
             LogLevel.Debug,
             "message",
+            null,
             LogAttributes.Empty);
         logger.LogAsync(
             LogLevel.Debug,
             "message",
+            null,
             LogAttributes.Empty).Wait();
     }
 
@@ -38,6 +40,7 @@ public class ExceptionTests
             logger.Log(
                 LogLevel.Debug,
                 "message",
+                null,
                 LogAttributes.Empty);
         });
         Assert.ThrowsAsync<Exception>(() =>
@@ -45,6 +48,7 @@ public class ExceptionTests
             return logger.LogAsync(
                 LogLevel.Debug,
                 "message",
+                null,
                 LogAttributes.Empty);
         });
     }
@@ -67,6 +71,7 @@ public class ExceptionTests
             logger.Log(
                 LogLevel.Debug,
                 "message",
+                null,
                 LogAttributes.Empty);
         });
         logOutput.Verify(l => l.Write(It.IsAny<FoghornLog>()), Times.Never);
@@ -75,6 +80,7 @@ public class ExceptionTests
             return logger.LogAsync(
                 LogLevel.Debug,
                 "message",
+                null,
                 LogAttributes.Empty);
         });
         logOutput.Verify(l => l.WriteAsync(It.IsAny<FoghornLog>()), Times.Never);
