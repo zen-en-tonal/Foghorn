@@ -3,7 +3,6 @@ image: mcr.microsoft.com/dotnet/sdk:6.0
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
-  - pack
   - publish
 
 before_script:
@@ -19,14 +18,10 @@ unit-test-job:   # This job runs in the test stage.
   script:
     - dotnet test
 
-pack-task:
-  stage: pack
-  script:
-    - dotnet pack -c Release
-
 publish-Foghorn.Log-task:
   stage: publish
   script:
+    - dotnet pack -c Release
     - dotnet nuget push Foghorn.Log/bin/Release/*.nupkg -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -34,6 +29,7 @@ publish-Foghorn.Log-task:
 publish-Foghorn.Logging-task:
   stage: publish
   script:
+    - dotnet pack -c Release
     - dotnet nuget push Foghorn.Logging/bin/Release/*.nupkg -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -41,6 +37,7 @@ publish-Foghorn.Logging-task:
 publish-Foghorn.Logging.Slack-task:
   stage: publish
   script:
+    - dotnet pack -c Release
     - dotnet nuget push Foghorn.Logging.Slack/bin/Release/*.nupkg -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
