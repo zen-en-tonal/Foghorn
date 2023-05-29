@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Log", "Foghorn.Log\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Logging.Tests", "Foghorn.Logging.Tests\Foghorn.Logging.Tests.csproj", "{E205656D-A796-43ED-8ACF-2C318CC6EDD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foghorn.Logging.Slack", "Foghorn.Logging.Slack\Foghorn.Logging.Slack.csproj", "{5A521148-BDE5-4739-9DDF-D20DDE3A6F4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{E205656D-A796-43ED-8ACF-2C318CC6EDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E205656D-A796-43ED-8ACF-2C318CC6EDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E205656D-A796-43ED-8ACF-2C318CC6EDD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A521148-BDE5-4739-9DDF-D20DDE3A6F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A521148-BDE5-4739-9DDF-D20DDE3A6F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A521148-BDE5-4739-9DDF-D20DDE3A6F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A521148-BDE5-4739-9DDF-D20DDE3A6F4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
