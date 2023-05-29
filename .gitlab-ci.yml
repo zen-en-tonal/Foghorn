@@ -3,6 +3,8 @@ image: mcr.microsoft.com/dotnet/sdk:6.0
 stages:          # List of stages for jobs, and their order of execution
   - build
   - test
+  - pack
+  - publish
 
 before_script:
   - dotnet restore
@@ -16,3 +18,29 @@ unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
     - dotnet test
+
+pack-task:
+  stage: pack
+  script:
+    - dotnet pack -c Release
+
+publish-Foghorn.Log-task:
+  stage: publish
+  script:
+    - dotnet Foghorn.Log/bin/Release/*.nupkg push -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+publish-Foghorn.Logging-task:
+  stage: publish
+  script:
+    - dotnet Foghorn.Logging/bin/Release/*.nupkg push -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+publish-Foghorn.Logging.Slack-task:
+  stage: publish
+  script:
+    - dotnet Foghorn.Logging.Slack/bin/Release/*.nupkg push -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
