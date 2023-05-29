@@ -27,20 +27,20 @@ pack-task:
 publish-Foghorn.Log-task:
   stage: publish
   script:
-    - dotnet Foghorn.Log/bin/Release/*.nupkg push -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
+    - dotnet nuget push Foghorn.Log/bin/Release/*.nupkg -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 publish-Foghorn.Logging-task:
   stage: publish
   script:
-    - dotnet Foghorn.Logging/bin/Release/*.nupkg push -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
+    - dotnet nuget push Foghorn.Logging/bin/Release/*.nupkg -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 publish-Foghorn.Logging.Slack-task:
   stage: publish
   script:
-    - dotnet Foghorn.Logging.Slack/bin/Release/*.nupkg push -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
+    - dotnet nuget push Foghorn.Logging.Slack/bin/Release/*.nupkg -k ${NUGET_API_KEY} -s https://api.nuget.org/v3/index.json
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
