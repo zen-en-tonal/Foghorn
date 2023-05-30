@@ -86,6 +86,57 @@ public class ExceptionTests
         logOutput.Verify(l => l.WriteAsync(It.IsAny<FoghornLog>()), Times.Never);
     }
 
+    [Fact]
+    public void When_NoThrow_called__should_not_throw_exception_at_provider()
+    {
+        var logOutputProvider = new Mock<ILogOutputProvider>();
+        logOutputProvider.Setup(l => l.CreateLogOutput()).Throws<Exception>();
+
+        var logger = new FoghornLoggerBuilder("ident", "host")
+            .AddLogOutput(LogLevel.Trace, logOutputProvider.Object)
+            .NoThrow()
+            .Build();
+
+        logger.Log(
+            LogLevel.Debug,
+            "message",
+            null,
+            LogAttributes.Empty);
+        logger.LogAsync(
+            LogLevel.Debug,
+            "message",
+            null,
+            LogAttributes.Empty).Wait();
+    }
+
+    [Fact]
+    public void When_not_NoThrow__should_throw_exception_at_provider()
+    {
+        var logOutputProvider = new Mock<ILogOutputProvider>();
+        logOutputProvider.Setup(l => l.CreateLogOutput()).Throws<Exception>();
+
+        var logger = new FoghornLoggerBuilder("ident", "host")
+            .AddLogOutput(LogLevel.Trace, logOutputProvider.Object)
+            .Build();
+
+        Assert.Throws<Exception>(() =>
+        {
+            logger.Log(
+                LogLevel.Debug,
+                "message",
+                null,
+                LogAttributes.Empty);
+        });
+        Assert.ThrowsAsync<Exception>(() =>
+        {
+            return logger.LogAsync(
+                LogLevel.Debug,
+                "message",
+                null,
+                LogAttributes.Empty);
+        });
+    }
+
     class ThrowableOutput : ILogOutput
     {
         public void Dispose()
