@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foghorn.Logging\Foghorn.Logging.csproj" />
+    <ProjectReference Include="..\Foghorn.Log\Foghorn.Log.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;netstandard2.0;netstandard2.1;</TargetFrameworks>
+
+    <!-- <PackageId>Foghorn.Logging.Gelf</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Takeru KODAMA</Authors>
+    <Description></Description>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://gitlab.com/zenen/foghorn</PackageProjectUrl>
+    <RepositoryUrl>https://gitlab.com/zenen/foghorn</RepositoryUrl>
+    <RepositoryType>git</RepositoryType> -->
+  </PropertyGroup>
+
+</Project>
