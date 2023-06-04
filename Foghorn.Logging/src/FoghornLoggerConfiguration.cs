@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Foghorn.Log;
 
 namespace Foghorn.Logging
 {
@@ -11,7 +10,7 @@ namespace Foghorn.Logging
 
         public bool NoThrow = false;
 
-        public ICollection<KeyValuePair<LogLevel, ILogOutputProvider>> LogOutputs =
-            new List<KeyValuePair<LogLevel, ILogOutputProvider>>();
+        public ICollection<KeyValuePair<IFoghornLoggerFilter, ILogOutputProvider>> LogOutputs =
+            new List<KeyValuePair<IFoghornLoggerFilter, ILogOutputProvider>>();
     }
 }
