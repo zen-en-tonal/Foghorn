@@ -15,11 +15,10 @@ namespace Foghorn.Logging
             this.Config = config;
         }
 
-        private IEnumerable<ILogOutputProvider> GetEnabledOutputProviders(LogLevel logLevel)
+        private IEnumerable<ILogOutputProvider> GetEnabledOutputProviders(FoghornLog log)
         {
             return this.Config.LogOutputs
-                .Where(l => logLevel >= l.Key)
-                .Select(l => l.Value);
+                .Where(l => l.IsEnabledOn(log));
         }
 
         public void Log(
@@ -48,7 +47,7 @@ namespace Foghorn.Logging
 
         private void Log(FoghornLog log)
         {
-            foreach (var provider in this.GetEnabledOutputProviders(log.LogLevel))
+            foreach (var provider in this.GetEnabledOutputProviders(log))
             {
                 this.TryLog(log, provider);
             }
@@ -72,7 +71,7 @@ namespace Foghorn.Logging
 
         private Task LogAsync(FoghornLog log)
         {
-            var tasks = this.GetEnabledOutputProviders(log.LogLevel)
+            var tasks = this.GetEnabledOutputProviders(log)
                 .Select(provider => this.TryLogAsync(log, provider));
             return Task.WhenAll(tasks);
         }

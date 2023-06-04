@@ -36,8 +36,19 @@ namespace Foghorn.Logging
 
         public FoghornLoggerBuilder AddLogOutput(LogLevel logLevel, ILogOutputProvider output)
         {
-            this.Config.LogOutputs.Add(
-                new KeyValuePair<LogLevel, ILogOutputProvider>(logLevel, output));
+            this.Config.LogOutputs.Add(new ContextLogOutputProvider(new LogLevelFilter(logLevel), output));
+            return this;
+        }
+
+        public FoghornLoggerBuilder AddLogOutput(IFoghornLoggerFilter filter, ILogOutputProvider output)
+        {
+            this.Config.LogOutputs.Add(new ContextLogOutputProvider(filter, output));
+            return this;
+        }
+
+        public FoghornLoggerBuilder AddLogOutput(IContextLogOutputProvider provider)
+        {
+            this.Config.LogOutputs.Add(provider);
             return this;
         }
 
