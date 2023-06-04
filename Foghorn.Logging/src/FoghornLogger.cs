@@ -18,8 +18,7 @@ namespace Foghorn.Logging
         private IEnumerable<ILogOutputProvider> GetEnabledOutputProviders(FoghornLog log)
         {
             return this.Config.LogOutputs
-                .Where(l => l.Key.IsEnabledOn(log))
-                .Select(l => l.Value);
+                .Where(l => l.IsEnabledOn(log));
         }
 
         public void Log(
